@@ -193,7 +193,7 @@
                     </ul>
                 </nav>
                 <div class="header-right-group">
-                    <a href="./contact.html" class="btn-top-accent">예약하기</a>
+                    <a href="https://map.naver.com/p/search/%EC%95%88%EC%82%B0%20%EC%84%9C%ED%8F%BF/place/1297992851?placePath=/ticket?bk_query=%EC%95%88%EC%82%B0%20%EC%84%9C%ED%8F%BF&from=map&fromPanelNum=2&timestamp=202606231609&locale=ko&svcName=map_pcv5&searchText=%EC%95%88%EC%82%B0%20%EC%84%9C%ED%8F%BF&entry=pll&fromNxList=true&filterType=%EC%97%85%EC%B2%B4&bk_query=%EC%95%88%EC%82%B0%20%EC%84%9C%ED%8F%BF&searchType=place&c=13.53,0,0,0,dh" class="btn-top-accent">예약하기</a>
                     <button class="menu-toggle-btn" id="menuToggle">
                         <span></span><span></span><span></span>
                     </button>
@@ -224,7 +224,7 @@
                         <strong>평가 기반의 정확한 체형 분석</strong>, <strong>분석을 통한 컨디셔닝 케어</strong>, 그리고 일상 및 스포츠 현장에서 <strong>지속 가능한 움직임 교육</strong>과 <strong>1:1 개인 맞춤 피드백</strong>까지 한 번에 연결되는 올인원 스포츠의학 공간입니다.
                     </p>
                 </div>
-                <div class="cert-text" style="padding-left: 20px;">
+                <div class="cert-text" style="padding-left: 0px;">
                     <h3 style="font-size: 1.4rem; font-weight: 800; color: #1a2536; margin-bottom: 15px; border-left: 4px solid #0052cc; padding-left: 15px;">
                         입증되고 검증된 각 전공 전문가
                     </h3>
@@ -267,7 +267,7 @@
                         <img src="../assets/center (1).jpg" alt="프라이빗 케어 룸 B">
                     </div>
                     <div class="facility-info">
-                        <h4>프라이빗 케어 룸 ()</h4>
+                        <h4>프라이빗 케어 룸 (B)</h4>
                         <p>1:1 전용 집중 근막이완 및 스트레칭, 수동 관절 가동 테크닉 전용 치료 베드 룸</p>
                     </div>
                 </div>
@@ -375,6 +375,41 @@
                     </div>
                 </div>
 
+
+                   <!-- [신규 추가] 협력 및 비즈니스 파트너십 섹션 -->
+        <section class="section-padding bg-light">
+            <div class="container">
+                <h2 class="section-title">비즈니스 파트너십 및 전문 지원</h2>
+                <div class="partnership-grid">
+                    
+                    <div class="facility-card" style="padding: 30px; text-align: center; border-top: 4px solid #0052cc;">
+                        <div style="font-size: 2rem; margin-bottom: 15px;">🤝</div>
+                        <h4 style="font-size: 1.15rem; font-weight: 800; margin-bottom: 15px;">협력 업체 및 제휴사 후원사</h4>
+                        <p style="color: #666; font-size: 0.95rem; line-height: 1.6;">건강한 스포츠 문화를 함께 만들어가는 공식 파트너사들과 견고한 네트워크를 구축하고 있습니다.</p>
+                    </div>
+
+                    <div class="facility-card" style="padding: 30px; text-align: center; border-top: 4px solid #0052cc;">
+                        <div style="font-size: 2rem; margin-bottom: 15px;">🔬</div>
+                        <h4 style="font-size: 1.15rem; font-weight: 800; margin-bottom: 15px;">연구 개발 LAB</h4>
+                        <p style="color: #666; font-size: 0.95rem; line-height: 1.6;">최신 스포츠 의학 데이터를 기반으로, 독자적인 스트레칭 보조 및 평가 기법을 연구·개발합니다.</p>
+                    </div>
+
+                    <div class="facility-card" style="padding: 30px; text-align: center; border-top: 4px solid #0052cc;">
+                        <div style="font-size: 2rem; margin-bottom: 15px;">🚗</div>
+                        <h4 style="font-size: 1.15rem; font-weight: 800; margin-bottom: 15px;">출장 케어 지원</h4>
+                        <p style="color: #666; font-size: 0.95rem; line-height: 1.6;">기업, 학교, 경기 현장 등 컨디셔닝이 필요한 곳 어디든 전문가가 직접 방문하여 케어합니다.</p>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+            <!-- 제휴 문의 버튼 섹션 -->
+    <div style="text-align: center; margin: 40px 0 80px 0;">
+        <a href="./collaboration.html" style="background-color: #0052cc; color: #ffffff; padding: 18px 50px; border-radius: 8px; text-decoration: none; font-weight: 800; font-size: 1.1rem; display: inline-block; transition: background 0.3s; box-shadow: 0 4px 12px rgba(0,82,204,0.3);">기업 및 단체 제휴 문의하기</a>
+    </div>
+
+
             </div>
         </div>
     </section>
@@ -419,5 +454,22 @@
             modal.classList.remove('show');
         }
     </script>
+
+        
+        <!-- 반응형 스타일 추가 (about.html의 <style> 태그 안에 추가해주세요) -->
+        <style>
+            .partnership-grid {
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                gap: 20px;
+                margin-top: 30px;
+            }
+            @media screen and (max-width: 768px) {
+                .partnership-grid { grid-template-columns: 1fr; }
+            }
+        </style>
+    </section>
+
+
 </body>
 </html>

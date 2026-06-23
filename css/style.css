@@ -638,3 +638,40 @@ footer p { margin-bottom: 10px; }
   .logo-item { display: block; width: 100%; margin: 10px 0; }
   .stat-item { display: block; width: 100%; margin: 25px 0; }
 }
+
+
+/* 기본 설정: 데스크탑 (4열) */
+.price-card-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+}
+
+/* 태블릿 설정: 768px ~ 1024px (2열) */
+@media (max-width: 1024px) {
+    .price-card-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* 모바일 설정: 767px 이하 (1열) */
+@media (max-width: 767px) {
+    .price-card-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+
+/* 섹션의 위아래 여백을 거의 없앰 */
+#partners {
+    padding: 10px 0 !important; 
+}
+
+/* 이미지 가로폭 확장 */
+.partners-image {
+    width: 100%;
+    max-width: 130%; /* 기존보다 더 넓게 설정 */
+    height: 0 auto;
+    display: block;
+    margin: 0 auto;
+}
