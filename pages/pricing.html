@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>가격 안내 | 컨디셔닝 서폿</title>
+    <!-- 상위 폴더 탈출 후 소문자 css 폴더 내 style.css 로드 -->
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        /* 💡 3열 정렬 가격 카드 그리드 시스템 */
+        .pricing-main-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            max-width: 1200px;
+            margin: 40px auto 0 auto;
+            width: 100%;
+        }
+
+        /* 클릭 가능한 카드 모션 및 비주얼 피드백 */
+        .price-click-card {
+            background: #ffffff;
+            border-radius: 16px;
+            border: 1px solid #eef2f6;
+            padding: 40px 30px;
+            position: relative;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.02);
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            height: 100%;
+            min-height: 380px;
+        }
+
+        .price-click-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            border-color: #0052cc;
+        }
+
+        .price-click-card.featured {
+            border: 1px solid #0052cc;
+        }
+
+        /* 💡 카드 하단의 '클릭 안내' 배너 데코레이션 */
+        .click-hint-badge {
+            display: inline-block;
+            margin-top: auto;
+            padding: 10px 0;
+            background-color: #f1f5f9;
+            color: #0052cc;
+            font-size: 0.85rem;
+            font-weight: 700;
+            border-radius: 8px;
+            transition: background-color 0.3s, color 0.3s;
+            width: 100%;
+        }
+
+        .price-click-card:hover .click-hint-badge {
+            background-color: #0052cc;
+            color: #ffffff;
+        }
+
+        .price-notice {
+            margin-top: 45px;
+            font-size: 0.92rem;
+            color: #64748b;
+            text-align: center;
+            font-weight: 500;
+        }
+
+        /* */
+        /* ==========================================================================
+           💡 [신규 설계] 요금 안내 팝업 모달 구조 및 슬라이드 테코레이션
+           ========================================================================== */
+        .pricing-modal {
+            display: none;
+            position: fixed;
+            z-index: 10000;
+            left: 0; top: 0; width: 100%; height: 100%;
+            background-color: rgba(11, 12, 16, 0.6);
+            backdrop-filter: blur(8px);
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .pricing-modal.show {
+            display: flex;
+            opacity: 1;
+        }
+
+        .pricing-modal-content {
+            background-color: #ffffff;
+            width: 90%;
+            max-width: 550px;
+            border-radius: 20px;
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.15);
+            padding: 40px;
+            position: relative;
+            transform: translateY(20px);
+            transition: transform 0.3s ease;
+        }
+
+        .pricing-modal.show .pricing-modal-content {
+            transform: translateY(0);
+        }
+
+        .pricing-modal-close {
+            position: absolute;
+            top: 20px; right: 25px;
+            font-size: 28px;
+            font-weight: 300;
+            color: #64748b;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+
+        .pricing-modal-close:hover {
+            color: #111111;
+        }
+
+        /* 실물 영수증의 정밀 디테일을 살린 가격 리스트 테이블 */
+        .modal-price-list {
+            margin-top: 25px;
+            border-top: 2px solid #1a2536;
+            border-bottom: 2px solid #1a2536;
+            padding: 10px 0;
+        }
+
+        .modal-price-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 14px 0;
+            border-bottom: 1px dashed #cbd5e1;
+        }
+
+        .modal-price-row:last-child {
+            border-bottom: none;
+        }
+
+        .modal-session-count {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #1a2536;
+        }
+
+        .modal-price-group {
+            text-align: right;
+        }
+
+        .modal-price-val {
+            font-size: 1.2rem;
+            font-weight: 800;
+            color: #0052cc;
+        }
+
+        .modal-price-val.undecided {
+            color: #888888;
+            font-size: 1.1rem;
+        }
+
+        .modal-price-unit {
+            display: block;
+            font-size: 0.82rem;
+            color: #64748b;
+            margin-top: 2px;
+            font-weight: 500;
+        }
+
+        /* 📱 모바일/태블릿용 1열 반응형 최적화 */
+        @media screen and (max-width: 1024px) {
+            .pricing-main-grid {
+                grid-template-columns: 1fr;
+                max-width: 480px;
+                padding: 0 15px;
+            }
+            .pricing-modal-content {
+                padding: 30px 20px;
+                width: 92%;
+            }
+        }
+    </style>
+</head>
+<body class="pricing-page">
+
+    <!-- -->
+    <!-- 고정 상단 영역 -->
+    <div class="fixed-top-area">
+        <div class="top-slogan-banner">
+            <div class="container text-center">
+                <span>TEST</span>
+            </div>
+        </div>
+        <header>
+            <div class="header-container">
+                <!-- 좌측 로고 (메인 이동) -->
+                <div class="logo"><a href="../index.html" style="text-decoration:none; color:#111;">컨디셔닝 서폿</a></div>
+                
+                <!-- 상단 네비게이션 메뉴 6개 완벽 동기화 및 경로 매칭 -->
+                <nav id="main-nav">
+                    <ul>
+                        <li><a href="../index.html">Home</a></li>
+                        <li><a href="../pages/about.html">서폿 소개</a></li>
+                        <li><a href="../pages/coach.html">코치 소개</a></li>
+                        <li><a href="./pricing.html" class="active">가격 안내</a></li>
+                        <li><a href="../pages/reviews.html">후기 모음</a></li>
+                        <li><a href="../pages/contact.html">문의하기</a></li>
+                    </ul>
+                </nav>
+                <div class="header-right-group">
+                    <a href="../pages/contact.html" class="btn-top-accent">예약하기</a>
+                    <button class="menu-toggle-btn" id="menuToggle">
+                        <span></span><span></span><span></span>
+                    </button>
+                </div>
+            </div>
+        </header>
+    </div>
+
+    <!-- 서브 히어로 -->
+    <section class="sub-page-hero text-center">
+        <div class="container">
+            <h1 class="sub-title">PRICING</h1>
+            <!-- 💡 방문자의 클릭 인터랙션을 직관적으로 유도하는 마케팅 슬로건 문구 기입 -->
+            <p class="sub-desc" style="color:#0052cc; font-weight:700;">★ 아래 카드를 클릭하시면 회차별 상세 정찰 요금표가 나타납니다.</p>
+        </div>
+    </section>
+
+    <!-- -->
+    <!-- 💡 [3열 그리드] 정찰제 대분류 안내 카드 그리드 -->
+    <section class="section-padding bg-light" style="padding-top: 30px;">
+        <div class="container">
+            <div class="pricing-main-grid">
+                
+                <!-- 1. 스포츠 컨디셔닝 케어 카드 -->
+                <div class="price-click-card featured" onclick="openPriceModal('conditioning')">
+                    <div class="price-badge" style="background-color: #1a2536;">60분 집중 과정</div>
+                    <div class="price-header" style="margin-top: 15px;">
+                        <h3 style="font-size: 1.45rem; color:#111;">스포츠 컨디셔닝 케어</h3>
+                        <p style="color: #64748b; font-size: 0.95rem; margin-top: 8px; line-height: 1.5;">
+                            스트레칭, 근막이완, 테라피 등 수동적 컨디셔닝 관리를 원하시는 분
+                        </p>
+                    </div>
+                    <div class="click-hint-badge">클릭하여 요금표 보기</div>
+                </div>
+
+                <!-- 2. 테라노바 기기 테라피 카드 -->
+                <div class="price-click-card featured" onclick="openPriceModal('theranova')">
+                    <div class="price-badge">30분 특화 과정</div>
+                    <div class="price-header" style="margin-top: 15px;">
+                        <h3 style="font-size: 1.45rem; color:#111;">테라노바 기기 테라피</h3>
+                        <p style="color: #64748b; font-size: 0.95rem; margin-top: 8px; line-height: 1.5;">
+                            온열찜질, 석션, 바이브레이션, EMS 등 정밀 물리 테라피를 원하시는 분
+                        </p>
+                    </div>
+                    <div class="click-hint-badge">클릭하여 요금표 보기</div>
+                </div>
+
+                <!-- 3. 1:1 맞춤형 운동 트레이닝 카드 -->
+                <div class="price-click-card featured" onclick="openPriceModal('training')">
+                    <div class="price-badge" style="background-color: #475569;">60분 / 30분 기획 과정</div>
+                    <div class="price-header" style="margin-top: 15px;">
+                        <h3 style="font-size: 1.45rem; color:#111;">1:1 맞춤형 운동</h3>
+                        <p style="color: #64748b; font-size: 0.95rem; margin-top: 8px; line-height: 1.5;">
+                            취약 부위 타겟 보강 및 퍼포먼스 향상을 위한 고효율 트레이닝을 원하시는 분
+                        </p>
+                    </div>
+                    <div class="click-hint-badge">클릭하여 요금표 보기</div>
+                </div>
+
+            </div>
+            
+            <p class="price-notice">※ 모든 프로그램 요금은 부가세(VAT)가 포함된 정찰제 가격입니다.</p>
+        </div>
+    </section>
+
+    <!-- -->
+    <!-- 💡 [가격 안내 팝업 모달] 정밀 영수증 스타일의 모달 팝업 구조 -->
+    <div id="priceModal" class="pricing-modal" onclick="closePriceModalOnOuter(event)">
+        <div class="pricing-modal-content">
+            <span class="pricing-modal-close" onclick="closePriceModal()">&times;</span>
+            
+            <div id="modalHeaderArea">
+                <span id="modalBadge" class="badge" style="background-color: #1a2536; color: white;">코스 종류</span>
+                <h2 id="modalTitle" style="font-size: 1.6rem; font-weight: 800; color: #111; margin-top: 10px;">프로그램명</h2>
+                <p id="modalDesc" style="color: #64748b; font-size: 0.95rem; margin-top: 5px;">세부 테크닉 정보</p>
+            </div>
+
+            <!-- 세션별 요금 리스트 테이블 (자바스크립트 주입 예정) -->
+            <div class="modal-price-list" id="modalPriceList">
+                <!-- 동적 렌더링 영역 -->
+            </div>
+
+            <div style="margin-top: 30px; display: flex; gap: 15px;">
+                <a href="../pages/contact.html" class="price-btn" style="flex: 1; border-radius: 8px; background-color: #0052cc;">상담 및 예약 신청</a>
+                <button onclick="closePriceModal()" class="price-btn" style="flex: 1; border-radius: 8px; background-color: #cbd5e1; color: #334155; border:none; cursor:pointer;">창 닫기</button>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 컨디셔닝 서폿(SUPPOT). All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <!-- -->
+    <!-- 💡 [모달 스크립트] 데이터에 따른 실시간 모달 팝업 빌드 자바스크립트 -->
+    <script>
+        // 모바일 메뉴 제어
+        const menuToggle = document.getElementById('menuToggle');
+        const mainNav = document.getElementById('main-nav');
+        menuToggle.addEventListener('click', () => {
+            mainNav.classList.toggle('active');
+            menuToggle.classList.toggle('open');
+        });
+
+        // 💡 가격표 데이터 셋업 (실물 영수증 데이터 100% 매칭)
+        const pricingData = {
+            conditioning: {
+                badge: "60분 케어 코스",
+                badgeBg: "#1a2536",
+                title: "스포츠 컨디셔닝 케어",
+                desc: "스트레칭, 근막이완, 매뉴얼 테크닉",
+                prices: [
+                    { count: "1회 세션", val: "₩ 99,000", unit: "단가 90,000" },
+                    { count: "5회 세션", val: "₩ 484,000", unit: "단가 88,000" },
+                    { count: "10회 세션", val: "₩ 935,000", unit: "단가 85,000" },
+                    { count: "20회 세션", val: "₩ 1,650,000", unit: "단가 75,000" }
+                ]
+            },
+            theranova: {
+                badge: "30분 테라피 코스",
+                badgeBg: "#0052cc",
+                title: "테라노바 기기 테라피",
+                desc: "온열찜질, 석션, 바이브레이션, EMS 에너지 테라피",
+                prices: [
+                    { count: "1회 세션", val: "₩ 55,000", unit: "단가 50,000" },
+                    { count: "5회 세션", val: "₩ 258,500", unit: "단가 47,000" },
+                    { count: "10회 세션", val: "₩ 484,000", unit: "단가 44,000" },
+                    { count: "20회 세션", val: "₩ 836,000", unit: "단가 38,000" }
+                ]
+            },
+            training: {
+                badge: "1:1 집중 트레이닝 코스",
+                badgeBg: "#475569",
+                title: "1:1 맞춤 운동",
+                desc: "60분 과정 및 30분 단시간 특화 보강 운동 프로그램",
+                prices: [
+                    { count: "운동 60분 (1회/5회/10회/20회)", val: "미정", unit: "상담 시 개별 이력 측정 후 산출" },
+                    { count: "운동 30분 (1회/5회/10회/20회)", val: "미정", unit: "상담 시 개별 이력 측정 후 산출" }
+                ]
+            }
+        };
+
+        // 팝업 열기 로직
+        function openPriceModal(category) {
+            const data = pricingData[category];
+            if (!data) return;
+
+            const modal = document.getElementById('priceModal');
+            const badge = document.getElementById('modalBadge');
+            const title = document.getElementById('modalTitle');
+            const desc = document.getElementById('modalDesc');
+            const listContainer = document.getElementById('modalPriceList');
+
+            // 텍스트 및 뱃지 색상 동적 매칭
+            badge.textContent = data.badge;
+            badge.style.backgroundColor = data.badgeBg;
+            title.textContent = data.title;
+            desc.textContent = data.desc;
+
+            // 요금표 동적 테이블 빌드업
+            let listHtml = "";
+            data.prices.forEach(item => {
+                const isUndecided = item.val === "미정";
+                listHtml += `
+                    <div class="modal-price-row">
+                        <span class="modal-session-count">${item.count}</span>
+                        <div class="modal-price-group">
+                            <span class="modal-price-val ${isUndecided ? 'undecided' : ''}">${item.val}</span>
+                            <span class="modal-price-unit">${item.unit}</span>
+                        </div>
+                    </div>
+                `;
+            });
+            listContainer.innerHTML = listHtml;
+
+            // 팝업 가시화 애니메이션 시작
+            modal.classList.add('show');
+        }
+
+        // 팝업 닫기 로직
+        function closePriceModal() {
+            const modal = document.getElementById('priceModal');
+            modal.classList.remove('show');
+        }
+
+        // 팝업 바깥 어두운 배경 클릭 시 닫히는 기능
+        function closePriceModalOnOuter(event) {
+            const modal = document.getElementById('priceModal');
+            if (event.target === modal) {
+                closePriceModal();
+            }
+        }
+    </script>
+</body>
+</html>

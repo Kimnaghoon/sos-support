@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>문의하기 | 컨디셔닝 서폿</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+    <div class="fixed-top-area">
+        <div class="top-slogan-banner">
+            <div class="container text-center">
+                <span>TEST</span>
+            </div>
+        </div>
+        <header>
+            <div class="header-container">
+                <div class="logo"><a href="../index.html" style="text-decoration:none; color:#111;">컨디셔닝 서폿</a></div>
+                <nav id="main-nav">
+                    <ul>
+                        <li><a href="../index.html">Home</a></li>
+                        <li><a href="./about.html">서폿 소개</a></li>
+                        <li><a href="./coach.html">코치 소개</a></li>
+                        <li><a href="./pricing.html">가격 안내</a></li>
+                        <li><a href="./reviews.html">후기 모음</a></li>
+                        <li><a href="./contact.html" class="active">문의하기</a></li>
+                    </ul>
+                </nav>
+                <div class="header-right-group">
+                    <a href="./contact.html" class="btn-top-accent">예약하기</a>
+                    <button class="menu-toggle-btn" id="menuToggle">
+                        <span></span><span></span><span></span>
+                    </button>
+                </div>
+            </div>
+        </header>
+    </div>
+
+    <section class="sub-page-hero text-center">
+        <div class="container">
+            <h1 class="sub-title">CONTACT</h1>
+            <p class="sub-desc">목표하시는 바를 남겨주시면 정밀 데이터 분석 기반 상담을 도와드립니다.</p>
+        </div>
+    </section>
+
+    <section class="section-padding bg-light">
+        <div class="container" style="max-width: 600px;">
+            <div style="background: white; padding: 40px; border-radius: 16px; box-shadow: 0 4px 25px rgba(0,0,0,0.03);">
+                <form action="#" method="POST" onsubmit="alert('상담 신청이 완료되었습니다. 조속히 연락드리겠습니다!'); return false;">
+                    
+                    <div class="form-group">
+                        <label>성함 *</label>
+                        <input type="text" placeholder="홍길동" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>연락처 *</label>
+                        <input type="tel" placeholder="010-1234-5678" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>방문 목적군 분류 *</label>
+                        <select required>
+                            <option value="">선택해주세요</option>
+                            <option value="elite">엘리트 선수 퍼포먼스 향상</option>
+                            <option value="amateur">아마추어 하이브리드 트레이닝</option>
+                            <option value="care">근골격계 불편감 및 자세 교정 케어</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>주요 상세 문의 및 신체 이력 내용</label>
+                        <textarea rows="5" placeholder="현재 운동 상태나 통증 부위, 달성하고자 하는 목표를 상세히 적어주시면 큰 도움이 됩니다."></textarea>
+                    </div>
+
+                    <button type="submit" class="price-btn" style="width: 100%; border: none; font-size: 1rem; cursor: pointer;">상담 신청서 제출하기</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 컨디셔닝 서폿(SUPPOT). All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        const menuToggle = document.getElementById('menuToggle');
+        const mainNav = document.getElementById('main-nav');
+        menuToggle.addEventListener('click', () => {
+            mainNav.classList.toggle('active');
+            menuToggle.classList.toggle('open');
+        });
+    </script>
+</body>
+</html>

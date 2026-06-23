@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>서폿 소개 | 컨디셔닝 서폿</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+    <div class="fixed-top-area">
+        <div class="top-slogan-banner">
+            <div class="container text-center">
+                <span>TEST</span>
+            </div>
+        </div>
+        <header>
+            <div class="header-container">
+                <div class="logo"><a href="../index.html" style="text-decoration:none; color:#111;">컨디셔닝 서폿</a></div>
+                <nav id="main-nav">
+                    <ul>
+                        <li><a href="../index.html">Home</a></li>
+                        <li><a href="./about.html" class="active">서폿 소개</a></li>
+                        <li><a href="./coach.html">코치 소개</a></li>
+                        <li><a href="./pricing.html">가격 안내</a></li>
+                        <li><a href="./reviews.html">후기 모음</a></li>
+                        <li><a href="./contact.html">문의하기</a></li>
+                    </ul>
+                </nav>
+                <div class="header-right-group">
+                    <a href="./contact.html" class="btn-top-accent">예약하기</a>
+                    <button class="menu-toggle-btn" id="menuToggle">
+                        <span></span><span></span><span></span>
+                    </button>
+                </div>
+            </div>
+        </header>
+    </div>
+
+    <section class="sub-page-hero text-center">
+        <div class="container">
+            <h1 class="sub-title">ABOUT US</h1>
+            <p class="sub-desc">스포츠 과학을 기반으로 당신의 신체 능력을 극대화합니다.</p>
+        </div>
+    </section>
+
+    <section class="section-padding bg-light">
+        <div class="container">
+            <h2 class="section-title">우리가 트레이닝을 리드하는 방식</h2>
+            <div class="grid-2" style="margin-bottom: 60px;">
+                <div class="cert-text">
+                    <span class="badge" style="background-color: #0052cc; color: white;">01. 데이터 기반 부상 방지</span>
+                    <h3 style="font-size: 1.6rem; margin-bottom: 15px; font-weight:700;">ACWR 트레이닝 로드 관리</h3>
+                    <p style="color:#555;">단순히 무겁게, 많이 시키는 구시대적 훈련은 배제합니다. 급성 및 만성 훈련 부하 비율(Acute:Chronic Workload Ratio)을 정밀하게 계산하여 부상 위험을 최소화하고 퍼포먼스를 안전하게 끌어올립니다.</p>
+                </div>
+                <div class="cert-image">
+                    <div class="placeholder-img" style="height: 250px;">스포츠 과학 데이터 그래픽 위치</div>
+                </div>
+            </div>
+
+            <div class="grid-2">
+                <div class="cert-image">
+                    <div class="placeholder-img" style="height: 250px;">맞춤형 컨디셔닝 트레이닝 이미지 위치</div>
+                </div>
+                <div class="cert-text" style="padding-left: 40px; padding-right: 0;">
+                    <span class="badge" style="background-color: #1a2536; color: white;">02. 세 가지 명확한 타겟 케어</span>
+                    <h3 style="font-size: 1.6rem; margin-bottom: 15px; font-weight:700;">선수부터 일반인의 일상까지</h3>
+                    <p style="color:#555; line-height: 1.8;">
+                        • <strong>엘리트 선수:</strong> 종목별 특이성을 고려한 파워 및 근력 극대화 프로그램<br>
+                        • <strong>아마추어 동호인:</strong> 부상 없이 즐기는 고효율 기능성 하이브리드 트레이닝<br>
+                        • <strong>통증 및 체형 케어 일반인:</strong> 만성 근골격계 불편감을 제거하는 일상 회복 솔루션
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 컨디셔닝 서폿(SUPPOT). All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        const menuToggle = document.getElementById('menuToggle');
+        const mainNav = document.getElementById('main-nav');
+        menuToggle.addEventListener('click', () => {
+            mainNav.classList.toggle('active');
+            menuToggle.classList.toggle('open');
+        });
+    </script>
+</body>
+</html>
