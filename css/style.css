@@ -4,6 +4,9 @@
   padding: 0;
   box-sizing: border-box;
   font-family: 'Noto Sans KR', sans-serif;
+  /* ⚡ 한글 줄바꿈 최적화 및 레이아웃 깨짐 방지 */
+  word-break: keep-all;
+  overflow-wrap: break-word;
 }
 
 body {
@@ -317,7 +320,7 @@ header nav ul li a:hover, header nav ul li a.active {
    ========================================================================== */
 .coach-image-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr); /* 데스크톱 가로 3열 배치 고정 */
+  grid-template-columns: repeat(3, 1fr);
   gap: 30px;
   max-width: 1400px;
   margin: 0 auto;
@@ -332,9 +335,9 @@ header nav ul li a:hover, header nav ul li a.active {
   border: 1px solid #eef2f6;
   cursor: pointer;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
-  max-width: 440px; /* 기존보다 카드의 전체 개별 면적을 약 16% 크게 조절 */
+  max-width: 440px;
   width: 100%;
-  margin: 0 auto; /* 반응형 1열 모드 시 자동 정중앙 정렬 */
+  margin: 0 auto;
 }
 
 .coach-image-card:hover {
@@ -345,7 +348,7 @@ header nav ul li a:hover, header nav ul li a.active {
 .coach-poster-wrapper {
   position: relative;
   width: 100%;
-  padding-top: 140%; /* 세로 포스터 규격 (1:1.4 세로 비율 최적화) */
+  padding-top: 140%;
 }
 
 .coach-poster-placeholder {
@@ -601,7 +604,6 @@ footer p { margin-bottom: 10px; }
   .menu-toggle-btn.open span:nth-child(2) { opacity: 0; }
   .menu-toggle-btn.open span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
 
-  /* 태블릿 환경(1024px 이하) 가로 2열 배치 보정 */
   .coach-image-grid { 
       grid-template-columns: repeat(2, 1fr); 
       gap: 25px; 
@@ -623,7 +625,6 @@ footer p { margin-bottom: 10px; }
   .sub-page-hero { padding: 130px 0 30px 0; }
   .sub-title { font-size: 1.8rem; }
   
-  /* 모바일 환경(600px 이하) 가로 1열 배치 보정 */
   .coach-image-grid {
       grid-template-columns: 1fr;
       gap: 20px;

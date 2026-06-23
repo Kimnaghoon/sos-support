@@ -4,29 +4,179 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>서폿 소개 | 컨디셔닝 서폿</title>
+    <!-- 상위 폴더 탈출 후 소문자 css 폴더 내 style.css 로드 -->
     <link rel="stylesheet" href="../css/style.css">
     <style>
-        .scope-card {
-            background-color: white;
-            padding: 30px;
+        /* 시설 갤러리 전용 프리미엄 그리드 스타일 */
+        .facility-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+            margin-top: 30px;
+        }
+
+        .facility-card {
+            background-color: #ffffff;
             border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.02);
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
             border: 1px solid #eef2f6;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .facility-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 82, 204, 0.08);
+        }
+
+        .facility-img-wrapper {
+            position: relative;
+            width: 100%;
+            padding-top: 67%; /* 3:2 비율의 정갈한 풍경 사진 비율 고정 */
+            background-color: #f1f5f9;
+            overflow: hidden;
+        }
+
+        .facility-img-wrapper img {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .facility-card:hover .facility-img-wrapper img {
+            transform: scale(1.05); /* 마우스 올렸을 때 부드러운 확대 */
+        }
+
+        .facility-info {
+            padding: 20px;
+        }
+
+        .facility-info h4 {
+            font-size: 1.15rem;
+            font-weight: 800;
+            color: #1a2536;
+            margin-bottom: 8px;
+        }
+
+        .facility-info p {
+            font-size: 0.9rem;
+            color: #64748b;
+            line-height: 1.5;
+        }
+
+        /* 💡 위아래 세로 배치를 위한 정렬 스타일 (폭을 100% 다 쓰게 변경) */
+        .scope-grid-two {
+            display: grid;
+            grid-template-columns: 1fr; /* 세로 1열로 변경하여 위아래 정렬 */
+            gap: 40px; /* 위아래 간격 넓힘 */
+            margin-top: 40px;
+            width: 100%;
+            max-width: 100%;
+        }
+
+        .scope-item-premium {
+            background: #ffffff;
+            padding: 40px; /* 여백을 넓혀서 시원하게 만듦 */
+            border-radius: 16px;
+            border-top: 4px solid #0052cc;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.02);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            /* 💡 가로로 무한히 늘어나며 화면 밖으로 탈출하는 스크롤 버그 원천 봉쇄 */
+            width: 100%;
+            max-width: 100%;
+            overflow: hidden; 
+            min-width: 0;
+        }
+
+        .scope-item-premium h4 {
+            font-size: 1.4rem; /* 제목도 큼직하게 강조 */
+            font-weight: 800;
+            color: #111111;
+            margin-bottom: 12px;
+        }
+
+        .scope-item-premium p {
+            font-size: 1rem; /* 가독성을 위해 본문 폰트 업 */
+            color: #475569;
+            line-height: 1.7;
+            margin-bottom: 30px;
+        }
+
+        /* 무한 정밀 슬라이더 프레임 (회색 테두리를 없애고 카드 배경과 일체화) */
+        .marquee-container {
+            width: 100%;
+            max-width: 100%;
+            overflow: hidden;
+            position: relative;
+            background-color: transparent; /* 카드 배경(#ffffff)과 완전히 일치하도록 투명으로 변경 */
+            padding: 10px 0; /* 슬라이더 패딩을 카드 규격에 맞춰 정돈 */
+        }
+
+        /* 슬라이딩 트랙 레일 */
+        .marquee-track {
+            display: flex;
+            width: max-content;
+            animation: marqueeEffect 30s linear infinite; /* 천천히 롤링 */
+        }
+
+        .marquee-track img {
+            height: 140px; /* 이미지 크기 큼직하게 유지 */
+            width: auto;
+            border-radius: 12px;
+            margin-right: 20px;
+            object-fit: cover;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.04);
+            cursor: pointer;
             transition: transform 0.3s;
         }
-        .scope-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 25px rgba(0,0,0,0.06);
+
+        .marquee-track img:hover {
+            transform: scale(1.03);
+        }
+
+        /* 끊김 현상 없는 자연스러운 흐름을 위한 CSS Keyframes 루프 애니메이션 */
+        @keyframes marqueeEffect {
+            0% {
+                transform: translate3d(0, 0, 0);
+            }
+            100% {
+                /* 전체 가식 이미지 세트가 한 사이클 돌았을 때 정확히 절반 지점(-50%)으로 튕김현상 없이 리턴 */
+                transform: translate3d(-50%, 0, 0);
+            }
+        }
+
+        /* 반응형 뷰포트 조절 */
+        @media screen and (max-width: 1024px) {
+            .facility-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 20px;
+            }
+        }
+
+        @media screen and (max-width: 600px) {
+            .facility-grid {
+                grid-template-columns: 1fr;
+            }
+            .scope-item-premium {
+                padding: 25px 20px;
+            }
+            .marquee-track img {
+                height: 100px;
+            }
         }
     </style>
 </head>
-<body>
+<body class="about-page">
 
     <!-- 고정 상단 영역 -->
     <div class="fixed-top-area">
         <div class="top-slogan-banner">
             <div class="container text-center">
-                <span>안산 최초 스포츠 컨디셔닝 전문 센터</span>
+                <span>안산 최초 스포츠 컨디셔닝 전문 센터 </span>
             </div>
         </div>
         <header>
@@ -56,51 +206,186 @@
     <section class="sub-page-hero text-center">
         <div class="container">
             <h1 class="sub-title">ABOUT US</h1>
-            <p class="sub-desc" style="color: #0052cc; font-weight:700;">SINCE 2024 • 스포츠 컨디셔닝 서폿 안산점</p>
+            <p class="sub-desc" style="color: #0052cc; font-weight: 700;">안산 최초 스포츠 컨디셔닝 전문 센터, 새로운 케어 패러다임</p>
         </div>
     </section>
 
-    <!-- 시설 특징 및 가치관 -->
-    <section class="section-padding bg-light" style="padding-top: 30px;">
+    <!-- 1. 브랜드 핵심 소개 -->
+    <section class="section-padding bg-light" style="padding-top: 40px; padding-bottom: 40px;">
         <div class="container">
-            <h2 class="section-title">최초 스포츠 컨디셔닝 전문 센터의 품격</h2>
-            
-            <div class="grid-2" style="margin-bottom: 60px;">
+            <div class="grid-2">
                 <div class="cert-text">
-                    <span class="badge" style="background-color: #0052cc; color: white;">최적의 전문 시설</span>
-                    <h3 style="font-size: 1.6rem; margin-bottom: 15px; font-weight:700;">1:1 집중 관리를 위한 안산점 환경</h3>
-                    <p style="color:#555; line-height: 1.8;">
-                        • 프라이빗함을 철저히 존중하는 <strong>케어 전용 룸 3개</strong> 완비<br>
-                        • 수동적 관리를 넘어 근본적 움직임을 개정하는 <strong>컨디셔닝 무브먼트 스페이스</strong> 보유<br>
-                        • <strong>수업 시간 외에도 자유롭게 방문</strong>하여 무브먼트 보강 및 자율 연습이 가능하도록 전폭 지원합니다.
+                    <span class="badge" style="background-color: #0052cc; color: white;">SINCE 2024</span>
+                    <h2 style="font-size: 2rem; font-weight: 800; line-height: 1.3; margin-bottom: 20px;">
+                        지금까지 없던<br>무브먼트와 케어 동시 관리
+                    </h2>
+                    <p style="color:#475569; font-size: 1.05rem; line-height: 1.8; margin-bottom: 20px;">
+                        스포츠 컨디셔닝 서폿 안산점은 단순한 마사지나 일차원적 PT 샵이 아닙니다.<br>
+                        <strong>평가 기반의 정확한 체형 분석</strong>, <strong>분석을 통한 컨디셔닝 케어</strong>, 그리고 일상 및 스포츠 현장에서 <strong>지속 가능한 움직임 교육</strong>과 <strong>1:1 개인 맞춤 피드백</strong>까지 한 번에 연결되는 올인원 스포츠의학 공간입니다.
                     </p>
                 </div>
-                <div class="cert-image">
-                    <div class="placeholder-img" style="height: 280px; background-color: #1a2536; color: white;">
-                        케어 전용 룸 & 무브먼트 훈련 공간 비주얼 영역
-                    </div>
+                <div class="cert-text" style="padding-left: 20px;">
+                    <h3 style="font-size: 1.4rem; font-weight: 800; color: #1a2536; margin-bottom: 15px; border-left: 4px solid #0052cc; padding-left: 15px;">
+                        입증되고 검증된 각 전공 전문가
+                    </h3>
+                    <p style="color: #555555; line-height: 1.8; font-size: 0.95rem;">
+                        서폿의 모든 코칭 스태프는 신뢰할 수 있는 학술 기반의 전공자들로 구성되어 있습니다.<br><br>
+                        • <strong>스포츠의과학, 임상운동학, 물리치료학, 체육학 전공</strong><br>
+                        • <strong>국가공인 건강운동관리사</strong> 취득 수석 연구진<br>
+                        • <strong>보건복지부 면허 물리치료사</strong> 및 선수 출신 엘리트 체육인<br>
+                        • 체계적인 운동 부하 및 데이터 관리를 통한 부상 예방
+                    </p>
                 </div>
             </div>
-
-            <!-- 비즈니스 활동 범주 -->
-            <h3 class="text-center" style="font-size: 1.6rem; font-weight:800; margin-top: 80px; margin-bottom: 40px;">서폿이 리드해나가는 학술 및 사회 공헌 활동</h3>
-            <div class="price-card-grid" style="grid-template-columns: repeat(3, 1fr); gap: 25px;">
-                <div class="scope-card">
-                    <h4 style="font-size: 1.15rem; font-weight:800; color:#0052cc; margin-bottom: 10px;">🔬 보조 평가 연구 개발 LAB</h4>
-                    <p style="font-size: 0.9rem; color:#666; line-height: 1.6;">안산 복싱클럽 및 안산시역도연맹과의 협력 하에 자체적인 '컨디셔닝 및 스트레칭 보조 평가 연구 개발 LAB'을 가동 중입니다.</p>
-                </div>
-                <div class="scope-card">
-                    <h4 style="font-size: 1.15rem; font-weight:800; color:#0052cc; margin-bottom: 10px;">🏫 전문 교육 및 스터디 진행</h4>
-                    <p style="font-size: 0.9rem; color:#666; line-height: 1.6;">지속적으로 업계 선배 코치진 및 동료 전문가들과 함께 '컨디셔닝 무브먼트 및 케어 교육 세미나/스터디'를 주도하여 현장의 깊이를 증명합니다.</p>
-                </div>
-                <div class="scope-card">
-                    <h4 style="font-size: 1.15rem; font-weight:800; color:#0052cc; margin-bottom: 10px;">🚌 공공기관 및 기업 활발한 출강</h4>
-                    <p style="font-size: 0.9rem; color:#666; line-height: 1.6;">관내 보건소, 지역 종합 센터, 공기업 및 민간 기업 기관 등 폭넓은 필드 출강을 비롯해 스포츠 컨디셔닝 케어 출장 지원을 제공합니다.</p>
-                </div>
-            </div>
-
         </div>
     </section>
+
+    <!-- 2. 실제 센터 시설 소개 갤러리 (사진 6장 매칭) -->
+    <section class="section-padding">
+        <div class="container">
+            <h2 class="section-title">프리미엄 공간 및 케어 공간 안내</h2>
+            <p style="text-align: center; color: #666; margin-top: -30px; margin-bottom: 40px; font-size: 0.95rem;">
+                각 이미지를 클릭하시면 웅장하고 선명한 전경 사진을 크게 감상하실 수 있습니다.
+            </p>
+            
+            <div class="facility-grid">
+                
+                <!-- 이미지 1: center (1).jpg -->
+                <div class="facility-card" onclick="openGalleryModal('../assets/center (2).jpg')">
+                    <div class="facility-img-wrapper">
+                        <img src="../assets/center (2).jpg" alt="프라이빗 케어 룸 A">
+                    </div>
+                    <div class="facility-info">
+                        <h4>프라이빗 케어 룸 (A)</h4>
+                        <p>바깥 전경이 보이는 탁 트인 개방감과 쾌적하고 차분한 조도 제어 집중 맞춤 케어 공간</p>
+                    </div>
+                </div>
+
+                <!-- 이미지 2: center (2).jpg -->
+               <div class="facility-card" onclick="openGalleryModal('../assets/center (1).jpg')">
+                    <div class="facility-img-wrapper">
+                        <img src="../assets/center (1).jpg" alt="프라이빗 케어 룸 B">
+                    </div>
+                    <div class="facility-info">
+                        <h4>프라이빗 케어 룸 ()</h4>
+                        <p>1:1 전용 집중 근막이완 및 스트레칭, 수동 관절 가동 테크닉 전용 치료 베드 룸</p>
+                    </div>
+                </div>
+
+                <!-- 이미지 3: center (3).jpg -->
+                <div class="facility-card" onclick="openGalleryModal('../assets/center (3).jpg')">
+                    <div class="facility-img-wrapper">
+                        <img src="../assets/center (3).jpg" alt="프라이빗 케어 룸 C">
+                    </div>
+                    <div class="facility-info">
+                        <h4>프라이빗 케어 룸 (C)</h4>
+                        <p>기타 세션 및 테라노바 온열 석션 장비 테라피가 원스톱으로 이루어지는 독립 프라이빗 룸</p>
+                    </div>
+                </div>
+
+                <!-- 이미지 4: center (4).jpg -->
+                <div class="facility-card" onclick="openGalleryModal('../assets/center (4).jpg')">
+                    <div class="facility-img-wrapper">
+                        <img src="../assets/center (4).jpg" alt="컨디셔닝 무브먼트 트레이닝 존 A">
+                    </div>
+                    <div class="facility-info">
+                        <h4>컨디셔닝 무브먼트 트레이닝 존 (A)</h4>
+                        <p>스포츠 잔디가 세팅되어 안전한 가속, 감속, 역도 등 다이나믹 무브먼트 교정 및 가동성 평가 존</p>
+                    </div>
+                </div>
+
+                <!-- 이미지 5: center (5).jpg -->
+                <div class="facility-card" onclick="openGalleryModal('../assets/center (5).jpg')">
+                    <div class="facility-img-wrapper">
+                        <img src="../assets/center (5).jpg" alt="컨디셔닝 무브먼트 트레이닝 존 B">
+                    </div>
+                    <div class="facility-info">
+                        <h4>컨디셔닝 무브먼트 트레이닝 존 (B)</h4>
+                        <p>수업 시간 외에도 회원 누구나 편하게 들어와서 배운 운동과 가동성 드릴을 개인 연습할 수 있는 자율 훈련 영역</p>
+                    </div>
+                </div>
+
+                <!-- 이미지 6: center (6).jpg -->
+                <div class="facility-card" onclick="openGalleryModal('../assets/center (6).jpg')">
+                    <div class="facility-img-wrapper">
+                        <img src="../assets/center (6).jpg" alt="컨설팅 라운지 및 로비 리셉션">
+                    </div>
+                    <div class="facility-info">
+                        <h4>컨설팅 라운지 & 리셉션</h4>
+                        <p>신체의과학 데이터 측정 데이터 시각화 상담 및 쾌적한 피드백 대화가 이루어지는 인포데스크 라운지</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. 센터 비즈니스 스코프 및 외부 협력 사업 -->
+    <section class="section-padding bg-light" style="overflow: hidden;">
+        <div class="container">
+            <h2 class="section-title">전문 연구 기관 및 교육 스코프</h2>
+            
+            <div class="scope-grid-two">
+                
+                <!-- 상단 카드: 컨디셔닝 무브먼트 및 케어 스터디 -->
+                <div class="scope-item-premium">
+                    <div>
+                        <h4>컨디셔닝 무브먼트 및 케어 스터디</h4>
+                        <p>안산 체육의 전공 학술 모임 및 스태프 스터디를 매주 개설하여, 가장 최신의 에비던스(근거)가 담긴 기법들만 실전에 적용합니다.</p>
+                    </div>
+                    
+                    <!-- 무한 롤링 슬라이딩 트랙 (대표 이미지를 롤링) -->
+                    <div class="marquee-container">
+                        <div class="marquee-track">
+                            <!-- 1번 이미지 세트 -->
+                            <img src="../assets/center (4).jpg" alt="Study Pic 1" onclick="openGalleryModal('../assets/center (4).jpg')">
+                            <img src="../assets/center (5).jpg" alt="Study Pic 2" onclick="openGalleryModal('../assets/center (5).jpg')">
+                            <img src="../assets/center (6).jpg" alt="Study Pic 3" onclick="openGalleryModal('../assets/center (6).jpg')">
+                            <img src="../assets/center (1).jpg" alt="Study Pic 4" onclick="openGalleryModal('../assets/center (1).jpg')">
+                            <!-- 💡 [수정완료] 무한 슬라이드를 위한 복제 세트에도 동일한 onclick 및 자막 속성 완벽 추가 -->
+                            <img src="../assets/center (4).jpg" alt="Study Pic 1 duplicated" onclick="openGalleryModal('../assets/center (4).jpg')">
+                            <img src="../assets/center (5).jpg" alt="Study Pic 2 duplicated" onclick="openGalleryModal('../assets/center (5).jpg')">
+                            <img src="../assets/center (6).jpg" alt="Study Pic 3 duplicated" onclick="openGalleryModal('../assets/center (6).jpg')">
+                            <img src="../assets/center (1).jpg" alt="Study Pic 4 duplicated" onclick="openGalleryModal('../assets/center (1).jpg')">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 하단 카드: 보건소 / 기업 / 기관 출강 연계 -->
+                <div class="scope-item-premium">
+                    <div>
+                        <h4>보건소 / 기업 / 기관 출강 연계</h4>
+                        <p>안산 시민 보건 안전 센터, 지자체 관공서 및 다수의 기업체 임직원 근골격 케어와 예방 세션 외부 출강을 도맡고 있습니다.</p>
+                    </div>
+                    
+                    <!-- 무한 롤링 슬라이딩 트랙 -->
+                    <div class="marquee-container">
+                        <div class="marquee-track">
+                            <!-- 2번 이미지 세트 -->
+                            <img src="../assets/center (2).jpg" alt="Outreach Pic 1" onclick="openGalleryModal('../assets/center (2).jpg')">
+                            <img src="../assets/center (3).jpg" alt="Outreach Pic 2" onclick="openGalleryModal('../assets/center (3).jpg')">
+                            <img src="../assets/center (5).jpg" alt="Outreach Pic 3" onclick="openGalleryModal('../assets/center (5).jpg')">
+                            <img src="../assets/center (6).jpg" alt="Outreach Pic 4" onclick="openGalleryModal('../assets/center (6).jpg')">
+                            <!-- 💡 [수정완료] 무한 슬라이드를 위한 복제 세트에도 동일한 onclick 및 자막 속성 완벽 추가 -->
+                            <img src="../assets/center (2).jpg" alt="Outreach Pic 1 duplicated" onclick="openGalleryModal('../assets/center (2).jpg')">
+                            <img src="../assets/center (3).jpg" alt="Outreach Pic 2 duplicated" onclick="openGalleryModal('../assets/center (3).jpg')">
+                            <img src="../assets/center (5).jpg" alt="Outreach Pic 3 duplicated" onclick="openGalleryModal('../assets/center (5).jpg')">
+                            <img src="../assets/center (6).jpg" alt="Outreach Pic 4 duplicated" onclick="openGalleryModal('../assets/center (6).jpg')">
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- 사진 확대용 인터랙티브 라이트박스 팝업 모달 -->
+    <div id="galleryModal" class="image-modal" onclick="closeGalleryModal()">
+        <span class="modal-close-btn">&times;</span>
+        <img class="modal-image-content" id="galleryModalImg" alt="확대 전경 이미지">
+        <!-- 이미지 설명 자막 바 -->
+        <div id="galleryCaption" style="color: #fff; text-align: center; margin-top: 15px; font-weight: 700; font-size: 1.1rem; text-shadow: 0 2px 4px rgba(0,0,0,0.8);"></div>
+    </div>
 
     <footer>
         <div class="container">
@@ -108,6 +393,7 @@
         </div>
     </footer>
 
+    <!-- 모바일 메뉴 및 갤러리 뷰어 제어 통합 스크립트 -->
     <script>
         const menuToggle = document.getElementById('menuToggle');
         const mainNav = document.getElementById('main-nav');
@@ -115,6 +401,23 @@
             mainNav.classList.toggle('active');
             menuToggle.classList.toggle('open');
         });
+
+        // 💡 갤러리 팝업 활성화 함수
+        function openGalleryModal(imgSrc, captionText) {
+            const modal = document.getElementById('galleryModal');
+            const modalImg = document.getElementById('galleryModalImg');
+            const caption = document.getElementById('galleryCaption');
+            
+            modal.classList.add('show');
+            modalImg.src = imgSrc;
+            caption.innerText = captionText || "";
+        }
+
+        // 갤러리 팝업 비활성화 함수
+        function closeGalleryModal() {
+            const modal = document.getElementById('galleryModal');
+            modal.classList.remove('show');
+        }
     </script>
 </body>
 </html>

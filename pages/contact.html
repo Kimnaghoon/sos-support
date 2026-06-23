@@ -6,35 +6,90 @@
     <title>문의하기 | 컨디셔닝 서폿</title>
     <link rel="stylesheet" href="../css/style.css">
     <style>
+        /* 문의하기 페이지 상세 폼 스타일 */
         .contact-details-box {
             background-color: white;
             padding: 30px;
             border-radius: 12px;
             border: 1px solid #eef2f6;
-            margin-bottom: 30px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+            flex-grow: 1; /* 남은 공간을 차지하도록 설정 */
         }
         .detail-line {
             display: flex;
             align-items: flex-start;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
         }
-        .detail-line:last-child { margin-bottom: 0; }
         .detail-line .label-tag {
             font-weight: 800;
             color: #0052cc;
             min-width: 90px;
-            font-size: 0.9rem;
+            font-size: 0.95rem;
         }
         .detail-line .val-text {
             color: #475569;
             font-size: 0.95rem;
-            line-height: 1.5;
+            line-height: 1.6;
+        }
+        .naver-booking-btn {
+            display: block;
+            width: 100%;
+            padding: 18px 0;
+            background-color: #03c75a;
+            color: #ffffff;
+            text-align: center;
+            text-decoration: none;
+            font-weight: 800;
+            font-size: 1.1rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(3, 199, 90, 0.2);
+            transition: background-color 0.2s, transform 0.2s;
+        }
+        .naver-booking-btn:hover {
+            background-color: #02b351;
+            transform: translateY(-2px);
+        }
+        
+        /* 💡 2단 레이아웃 핵심 설정 */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr; /* 좌우 1:1 비율 */
+            gap: 30px;
+            align-items: start;
+        }
+
+        /* 정사각형 지도 컨테이너 */
+        .map-container {
+            width: 100%; 
+            padding-top: 100%; /* 가로세로 1:1 정사각형 */
+            position: relative; 
+            border-radius: 12px; 
+            overflow: hidden; 
+            border: 1px solid #eef2f6;
+            background-color: #f8f9fa;
+        }
+        .map-container iframe {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+        }
+
+        /* 정보 및 버튼 묶음 컨테이너 */
+        .info-button-wrapper {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        @media screen and (max-width: 768px) {
+            .contact-grid {
+                grid-template-columns: 1fr; /* 모바일에서는 1열 */
+            }
         }
     </style>
 </head>
 <body>
 
-    <!-- 고정 상단 영역 -->
     <div class="fixed-top-area">
         <div class="top-slogan-banner">
             <div class="container text-center">
@@ -64,90 +119,52 @@
         </header>
     </div>
 
-    <!-- 서브 히어로 -->
     <section class="sub-page-hero text-center">
         <div class="container">
             <h1 class="sub-title">CONTACT US</h1>
-            <p class="sub-desc" style="color:#0052cc; font-weight:700;">★ 이메일로 문의 내용을 보내주시면 확인 후 조속히 개별 연락드리겠습니다.</p>
+            <p class="sub-desc" style="color: #0052cc; font-weight: 700;">지점 위치와 실시간 예약 스케줄을 확인해 주세요.</p>
         </div>
     </section>
 
-    <!-- 문의 폼 및 위치 정보 분할 구조 -->
     <section class="section-padding bg-light" style="padding-top: 20px;">
         <div class="container">
-            <div class="grid-2" style="gap:40px;">
+            <!-- 💡 좌측 지도 | 우측 설명+버튼 2단 레이아웃 -->
+            <div class="contact-grid">
                 
-                <!-- 좌측: 위치 및 운영 세부 사항 상세화 -->
-                <div>
-                    <h3 style="font-size: 1.45rem; font-weight: 800; margin-bottom: 20px; color:#111;">지점 및 시설 안내</h3>
+                <!-- 왼쪽: 정사각형 지도 -->
+                <div class="map-container">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d890.3895770978405!2d126.83146783874334!3d37.319117772871365!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357b6f0473f0b6c9%3A0x6d7749e7a9a639a0!2z7JeQ7J207Iqk7YOA7JuM!5e0!3m2!1sko!2skr!4v1782208017306!5m2!1sko!2skr" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+
+                <!-- 오른쪽: 설명칸(위) + 예약버튼(아래) -->
+                <div class="info-button-wrapper">
                     <div class="contact-details-box">
                         <div class="detail-line">
                             <span class="label-tag">📍 찾아오시는 길</span>
-                            <span class="val-text"><strong>경기도 안산시 단원구 고잔로 54 에이스타워 2층 209호</strong></span>
+                            <span class="val-text">경기도 안산시 단원구 고잔로 54<br>에이스타워 2층 209호</span>
                         </div>
                         <div class="detail-line">
                             <span class="label-tag">🕒 운영 시간</span>
-                            <span class="val-text"><strong>10:00 - 22:00</strong><br><span style="color:#0052cc; font-size:0.85rem; font-weight:700;">※ 퇴근 후 밤늦은 야간 케어까지 여유롭게 예약 가능합니다.</span></span>
+                            <span class="val-text">10:00 - 22:00</span>
                         </div>
                         <div class="detail-line">
-                            <span class="label-tag">🏢 센터 시설</span>
-                            <span class="val-text">프라이빗 1:1 전용 케어 룸 3실 / 무브먼트 훈련 전용 센터 공간</span>
-                        </div>
-                        <div class="detail-line">
-                            <span class="label-tag">🚗 주차 안내</span>
-                            <span class="val-text">에이스타워 내 쾌적하고 넉넉한 주차 공간 완전 지원</span>
+                            <span class="label-tag">💡 안내 사항</span>
+                            <span class="val-text">
+                                • 야간 퇴근 후 케어 가능<br>
+                                • 사전 예약제 운영<br>
+                                • 전용 주차장 완비
+                            </span>
                         </div>
                     </div>
                     
-                    <!-- 네이버 지도가 매칭될 플레이스홀더 영역 -->
-                    <div class="placeholder-img" style="height: 250px; background-color: #e2e8f0;">
-                        네이버 지도 / 카카오 맵 연동 이미지 영역
-                    </div>
-                </div>
-
-                <!-- 우측: 상담 및 접수 문의 폼 양식 -->
-                <div style="background: white; padding: 40px; border-radius: 16px; box-shadow: 0 4px 25px rgba(0,0,0,0.03);">
-                    <h3 style="font-size: 1.45rem; font-weight: 800; margin-bottom: 20px; color:#111; text-align:center;">상담 및 케어 예약 접수</h3>
-                    <form action="#" method="POST" onsubmit="alert('상담 신청이 완료되었습니다. 조속히 연락드리겠습니다!'); return false;">
-                        
-                        <div class="form-group">
-                            <label>성함 *</label>
-                            <input type="text" placeholder="홍길동" required>
-                        </div>
-
-                        <div class="form-group">
-                            <label>연락처 *</label>
-                            <input type="tel" placeholder="010-1234-5678" required>
-                        </div>
-
-                        <div class="form-group">
-                            <label>방문 목적군 분류 *</label>
-                            <select required>
-                                <option value="">선택해주세요</option>
-                                <option value="elite">엘리트 선수 퍼포먼스 향상</option>
-                                <option value="amateur">아마추어 하이브리드 트레이닝</option>
-                                <option value="care">근골격계 불편감 및 자세 교정 케어</option>
-                            </select>
-                        </div>
-
-                        <div class="form-group">
-                            <label>문의 및 세부 상태 기술</label>
-                            <textarea rows="4" placeholder="현재 겪고 계신 불편감이나 선수 종목, 목표 등을 남겨주세요."></textarea>
-                        </div>
-
-                        <button type="submit" class="price-btn" style="width: 100%; border: none; font-size: 1rem; cursor: pointer; background-color:#0052cc;">상담 접수서 제출</button>
-                    </form>
+                    <a href="https://pcmap.place.naver.com/place/1297992851/ticket?bk_query=%EC%95%88%EC%82%B0%20%EC%84%9C%ED%8F%BF&entry=pll&fromNxList=true&fromPanelNum=2&timestamp=202606231609&locale=ko&svcName=map_pcv5&searchText=%EC%95%88%EC%82%B0%20%EC%84%9C%ED%8F%BF&filterType=%EC%97%85%EC%B2%B4" target="_blank" class="naver-booking-btn">
+                        💚 실시간 스케줄 확인 및 네이버 예약하기
+                    </a>
                 </div>
 
             </div>
         </div>
     </section>
-
-    <footer>
-        <div class="container">
-            <p>&copy; 2026 컨디셔닝 서폿(SUPPOT) 안산점. All Rights Reserved.</p>
-        </div>
-    </footer>
 
     <script>
         const menuToggle = document.getElementById('menuToggle');
