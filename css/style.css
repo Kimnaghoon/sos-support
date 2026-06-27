@@ -45,7 +45,9 @@ body {
 /* ==========================================================================
    상단 영역 고정 헤더 구조 (PC 기본)
    ========================================================================== */
-.fixed-top-area {
+
+
+   .fixed-top-area {
   position: fixed;
   top: 0; left: 0; width: 100%;
   z-index: 1000;
@@ -68,28 +70,31 @@ header {
   border-bottom: 1px solid #eeeeee;
 }
 
+/* 헤더 컨테이너 고정 */
 .header-container {
-  max-width: 1400px;
-  margin: 0 auto;
-  display: table;
-  width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 95%;
+    height: 70px; /* 모든 페이지 동일하게 70px로 고정 */
 }
 
+/* 로고 크기 및 정렬 통일 */
 header .logo {
-  display: table-cell;
-  vertical-align: middle;
-  width: 25%;
-  color: #111111;
-  font-size: 1.25rem;
-  font-weight: 800;
-  white-space: nowrap;
+    display: flex; /* table-cell 대신 flex 사용 권장 */
+    align-items: center;
+    width: 25%;
+    font-size: 1.25rem;
+    font-weight: 800;
 }
 
+/* 내비게이션 크기 통일 */
 header nav {
-  display: table-cell;
-  vertical-align: middle;
-  text-align: right;
-  width: 55%;
+    display: block; /* table-cell 제거 */
+    text-align: right;
+    width: 55%;
 }
 
 header nav ul {

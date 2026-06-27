@@ -16,7 +16,7 @@
         </div>
         <header>
             <div class="header-container">
-                <div class="logo"><a href="../index.html" style="text-decoration:none; color:#111;">컨디셔닝 서폿</a></div>
+                <div class="logo"><a href="../index.html" style="text-decoration:none; color:#111; display:flex; align-items:center; gap:10px;"><img src="../assets/logo.jpg" alt="로고" style="height:30px;">스포츠 컨디셔닝 서폿</a></div>
                 <nav id="main-nav">
                     <ul>
                         <li><a href="../index.html">Home</a></li>
@@ -44,37 +44,75 @@
         </div>
     </section>
 
-    <section class="section-padding bg-light">
-        <div class="container">
-            <div class="coach-image-grid" style="grid-template-columns: repeat(2, 1fr);">
+    <section class="vertical-scroll-bg" style="position: relative; padding-top: 120px; padding-bottom: 150px;">
+    
+        <div class="overlay" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(26, 37, 54, 0.6); z-index: 1;"></div>
+
+        <div style="position: relative; z-index: 2; width: 95%; max-width: 1600px; margin: 0 auto;">
+            
+            <div class="coach-image-grid" style="display: grid; grid-template-columns: repeat(5, 1fr); gap: 30px 50px;">   <!-- (?,?)  행열 조절 --> <!-- gap: 세로높이 가로너비 -->
                 
-                <div class="coach-image-card" style="cursor:default; padding:30px;">
-                    <span class="badge" style="background-color:#0052cc; color:white; margin-bottom:10px;">엘리트 역도 선수</span>
-                    <h4 style="font-size:1.25rem; margin-bottom:10px; font-weight:700;">"인상(Snatch) 랭킹 및 1RM 기록 갱신"</h4>
-                    <p style="color:#555; font-size:0.95rem;">무작정 무겁게 들던 방식에서 벗어나 철저한 운동 및 케어을 받았습니다. 만성적이던 무릎 통증이 사라지면서 최고 기록을 안전하게 경신했습니다.</p>
+                <div class="coach-image-card" style="border-radius: 12px; overflow: hidden; box-shadow: 0 5px 20px rgba(0,0,0,0.15); background-color: white;">
+                    <img src="../assets/review1.png" alt="리뷰 1" style="width: 100%; display: block; object-fit: cover; cursor: pointer;">
                 </div>
-
-                <div class="coach-image-card" style="cursor:default; padding:30px;">
-                    <span class="badge" style="background-color:#1a2536; color:white; margin-bottom:10px;">직장인 동호인</span>
-                    <h4 style="font-size:1.25rem; margin-bottom:10px; font-weight:700;">"만성 어깨 불편감 극복"</h4>
-                    <p style="color:#555; font-size:0.95rem;">크로스핏 어깨 통증 완화.</p>
+                <div class="coach-image-card" style="border-radius: 12px; overflow: hidden; box-shadow: 0 5px 20px rgba(0,0,0,0.15); background-color: white;">
+                    <img src="../assets/review1.png" alt="리뷰 2" style="width: 100%; display: block; object-fit: cover; cursor: pointer;">
                 </div>
-
-                <div class="coach-image-card" style="cursor:default; padding:30px;">
-                    <span class="badge" style="background-color:#0052cc; color:white; margin-bottom:10px;">아마추어 선수</span>
-                    <h4 style="font-size:1.25rem; margin-bottom:10px; font-weight:700;">"블라블라"</h4>
-                    <p style="color:#555; font-size:0.95rem;">블라블라블라</p>
+                <div class="coach-image-card" style="border-radius: 12px; overflow: hidden; box-shadow: 0 5px 20px rgba(0,0,0,0.15); background-color: white;">
+                    <img src="../assets/review1.png" alt="리뷰 3" style="width: 100%; display: block; object-fit: cover; cursor: pointer;">
                 </div>
-
-                <div class="coach-image-card" style="cursor:default; padding:30px;">
-                    <span class="badge" style="background-color:#64748b; color:white; margin-bottom:10px;">일반 회원</span>
-                    <h4 style="font-size:1.25rem; margin-bottom:10px; font-weight:700;">"불랄라"</h4>
-                    <p style="color:#555; font-size:0.95rem;">에베베베.</p>
+                <div class="coach-image-card" style="border-radius: 12px; overflow: hidden; box-shadow: 0 5px 20px rgba(0,0,0,0.15); background-color: white;">
+                    <img src="../assets/review1.png" alt="리뷰 4" style="width: 100%; display: block; object-fit: cover; cursor: pointer;">
+                </div>
+                <div class="coach-image-card" style="border-radius: 12px; overflow: hidden; box-shadow: 0 5px 20px rgba(0,0,0,0.15); background-color: white;">
+                    <img src="../assets/review1.png" alt="리뷰 5" style="width: 100%; display: block; object-fit: cover; cursor: pointer;">
+                </div>
+                <div class="coach-image-card" style="border-radius: 12px; overflow: hidden; box-shadow: 0 5px 20px rgba(0,0,0,0.15); background-color: white;">
+                    <img src="../assets/review1.png" alt="리뷰 6" style="width: 100%; display: block; object-fit: cover; cursor: pointer;">
+                </div>
+                <div class="coach-image-card" style="border-radius: 12px; overflow: hidden; box-shadow: 0 5px 20px rgba(0,0,0,0.15); background-color: white;">
+                    <img src="../assets/review1.png" alt="리뷰 7" style="width: 100%; display: block; object-fit: cover; cursor: pointer;">
+                </div>
+                <div class="coach-image-card" style="border-radius: 12px; overflow: hidden; box-shadow: 0 5px 20px rgba(0,0,0,0.15); background-color: white;">
+                    <img src="../assets/review1.png" alt="리뷰 8" style="width: 100%; display: block; object-fit: cover; cursor: pointer;">
+                </div>
+                <div class="coach-image-card" style="border-radius: 12px; overflow: hidden; box-shadow: 0 5px 20px rgba(0,0,0,0.15); background-color: white;">
+                    <img src="../assets/review1.png" alt="리뷰 9" style="width: 100%; display: block; object-fit: cover; cursor: pointer;">
+                </div>
+                <div class="coach-image-card" style="border-radius: 12px; overflow: hidden; box-shadow: 0 5px 20px rgba(0,0,0,0.15); background-color: white;">
+                    <img src="../assets/review1.png" alt="리뷰 10" style="width: 100%; display: block; object-fit: cover; cursor: pointer;">
                 </div>
 
             </div>
         </div>
+
+        <style>
+            .vertical-scroll-bg {
+                background-image: url('../assets/review-bg.jpg');
+                background-size: 100% auto; 
+                background-position: center 0;
+                background-repeat: repeat-y; 
+                animation: scrollBackgroundUp 200s linear infinite; 
+            }
+
+            @keyframes scrollBackgroundUp {
+                0% { background-position: center 0; }
+                100% { background-position: center -2500vw; } 
+            }
+
+            @media (max-width: 768px) {
+                .coach-image-grid {
+                    grid-template-columns: 1fr !important;
+                    gap: 30px !important;
+                }
+            }
+        </style>
     </section>
+
+    <div id="imageModal" class="image-modal" onclick="closeModal()">
+        <span class="modal-close-btn">&times;</span>
+        <img class="modal-image-content" id="modalImg" alt="확대된 이미지">
+    </div>
 
     <footer>
         <div class="container">
@@ -88,6 +126,25 @@
         menuToggle.addEventListener('click', () => {
             mainNav.classList.toggle('active');
             menuToggle.classList.toggle('open');
+        });
+
+        // 팝업 기능
+        function openModal(imgSrc) {
+            const modal = document.getElementById('imageModal');
+            const modalImg = document.getElementById('modalImg');
+            modal.classList.add('show');
+            modalImg.src = imgSrc; 
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('imageModal');
+            modal.classList.remove('show');
+        }
+
+        document.querySelectorAll('.coach-image-card img').forEach(img => {
+            img.addEventListener('click', function() {
+                openModal(this.src);
+            });
         });
     </script>
 </body>
